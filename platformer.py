@@ -58,9 +58,11 @@ class Player():
 	'''
 		self.vy += 0.03
 		if self.y + self.rect.height/2 + self.vy >= height:
-
+			self.on_ground = True
 			self.y = height-self.rect.height/2
 			self.vy = 0 
+		else:
+			self.on_ground = False
 	
 
 		
@@ -125,8 +127,8 @@ def main():
 				pass
 
 			if event.key == pygame.K_w:
-				#player1.on_ground = False
-				player1.vy=-2
+				if player1.on_ground:
+					player1.vy=-2
 				#player1.on_ground = True
 
 
