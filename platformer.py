@@ -30,7 +30,7 @@ class Player():
 		self.on_ground=True
 		self.health=100
 		self.mana=100
-		self.rect=(0,0,tile_width,tile_height)
+		self.rect=pygame.Rect(0,0,tile_width,tile_height)
 
 	def draw(self):
 		#self.rect.center=(self.x,self.y)
