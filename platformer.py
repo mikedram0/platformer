@@ -38,11 +38,11 @@ class Player():
 	def collision_detect(self):
 
 		for static in staticList:
-
-			if self.rect.colliderect(static.rect):
-				self.vy=0
-				self.y=static.y-static.rect.height/2-self.rect.height/2
-				self.on_ground=True
+			if self.y+self.rect.height/2 <= static.y+static.rect.height/2:
+				if self.rect.colliderect(static.rect):
+					self.vy=0
+					self.y=static.y-static.rect.height/2-self.rect.height/2
+					self.on_ground=True
 				
 
 	def move(self):
