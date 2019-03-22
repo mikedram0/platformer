@@ -12,12 +12,13 @@ size = width, height = 800, 600
 black = 0, 0, 0
 
 #screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+mag1 = pygame.image.load("magician1.png")
 screen = pygame.display.set_mode((width, height))
 
 clock=pygame.time.Clock()
 
-
-
+CameraX = 0
+CameraY = 0
 
 FPS=60
 
@@ -30,14 +31,16 @@ class Player():
 		self.on_ground=False
 		self.health=100
 		self.mana=100
+		self.image = mag1
 
-		self.rect=pygame.Rect(0,0,32,32)
+		self.rect=self.image.get_rect()
 
 	def draw(self):
+		global CameraX , CameraY
 		self.rect.center = (self.x,self.y)
 
 		
-		pygame.draw.rect(screen,(255,0,0),self.rect)
+		screen.blit(self.image,(self.x - CameraX, self.y - CameraY))
 
 	def collision_detect(self):
 		pass
@@ -59,11 +62,12 @@ class Player():
 		self.vy += 0.03
 
 		#if self.on_ground:
-		if self.y + self.rect.height/2 + self.vy >= height:
+		if self.y + self.rect.height + self.vy >= height:
 
 			self.on_ground = True
-			self.y = height-self.rect.height/2
-			self.vy = 0 
+			self.vy = 0
+			self.y = height-self.rect.height
+			
 		else:
 			self.on_ground = False
 	
@@ -72,9 +76,12 @@ class Player():
 		self.x+=self.vx
 		self.y+=self.vy
 
+
+
 player1=Player(width/2,height/2)
 
 def main():
+	global CameraX , CameraY
 
 	screen.fill(black)
 
@@ -116,6 +123,7 @@ def main():
 
 			if event.key==pygame.K_a:
 				player1.vx=-2
+				CameraX += -10
 
 			if event.key==pygame.K_SPACE:
 				pass
@@ -125,6 +133,7 @@ def main():
 
 			if event.key==pygame.K_d:
 				player1.vx=2
+				CameraX += 10
 
 			if event.key==pygame.K_s:
 				pass
