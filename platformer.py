@@ -40,52 +40,10 @@ class Player():
 		for static in staticList:
 
 			if self.rect.colliderect(static.rect):
+				self.vy=0
+				self.y=static.y-static.rect.height/2-self.rect.height/2
+				self.on_ground=True
 				
-				#if self.x + self.rect.width/2 + self.vx >= static.x - static.rect.width/2:
-				#	self.x -= self.vx
-				#	self.vx = 0
-					
-				#if self.x - self.rect.width/2 - self.vx <= static.x + static.rect.width/2:
-				#	self.vx = 0
-
-				if self.y + self.rect.height/2 + self.vy >= static.y - static.rect.height/2:
-					self.y -= self.vy
-					self.vy = 0
-					self.on_ground = True
-			#	if self.y - self.rect.height/2 + self.vy <= static.y + static.rect.height/2:
-			#		self.vy = 0
-			
-
-			'''
-			if self.rect.colliderect(static.rect):
-				#print("collision")
-
-				if self.vy > 0 :
-
-					self.y -= self.vy
-					self.vy = 0
-					
-					self.on_ground = True
-
-				if self.vx > 0 :
-					self.x -= self.vy
-					self.vx = 0
-
-
-				if self.vy < 0 :
-
-					self.y += self.vy
-					self.vy = 0
-					
-					self.on_ground = True
-
-				if self.vx < 0 :
-					self.x += self.vy
-					self.vx = 0
-				'''
-
-
-
 
 	def move(self):
 		
@@ -206,4 +164,3 @@ while 1:
 
 pygame.quit()
 quit()
-
